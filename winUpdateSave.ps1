@@ -5,15 +5,21 @@ $users = @(gci "$steamdir\userdata" -Name -Directory)
 
 if($users.length -gt 1){
   Write-Host "Multiple Users Found:"
-  $indexes = (0..($users.length - 1))  
+  $indexes = (0..($users.length - 1))
   
-  $indexes | % {
-    Write-Host "$_ - $($users[$_])"
-  }
-  $opt = Read-Host "Please Select User Update Save For: "
-  $user = $users[$opt]
-  
-} elseif ($users.length -eq 1){
+  while($true) {
+    $indexes | % {
+      Write-Host "$_ - $($users[$_])"
+    }
+    $opt = Read-Host "Please Select User to Update Save For: "
+    if {$indexes.Contains($opt)} {
+      $user = $users[$opt]
+      break;
+    } else {
+      Write-Host "Invalid Option"
+    }
+  }  
+} elseif($users.length -eq 1) {
   Write-Host "Found Following User:"
   Write-Host $users[0]
   
