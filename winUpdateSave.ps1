@@ -1,5 +1,29 @@
-$dir=(@('HKLM:\SOFTWARE\Wow6432Node\Valve\Steam','HKLM:\SOFTWARE\Valve\Steam') | Select -First 1 | ? {Test-Path $_} | Get-ItemPropertyValue -Name InstallPath) + "\userdata\166750487\444640\local\Data\Docs";
-Write-Host "Located BTDBattles Steam Directory: $dir";
+$steamdir=(@('HKLM:\SOFTWARE\Wow6432Node\Valve\Steam','HKLM:\SOFTWARE\Valve\Steam') | Select -First 1 | ? {Test-Path $_} | Get-ItemPropertyValue -Name InstallPath);
+Write-Host "Located Steam Directory: $steamdir";
+
+$users = @(gci "$steamdir\userdata" -Name -Directory)
+
+if($users.length -gt 1){
+  Write-Host "Multiple Users Found:"
+  $indexes = (0..($users.length - 1))  
+  
+  $indexes | % {
+    Write-Host "$_ - $($users[$_])"
+  }
+  $opt = Read-Host "Please Select User Update Save For: "
+  $user = $users[$opt]
+  
+} else if ($users.length -eq 1){
+  Write-Host "Found Following User:"
+  Write-Host $users[0]
+  
+  $user = $users[0]
+} else {
+  throw "No User Data Found"
+}
+
+$dir = "$steamdir\userdata\$user\444640\local\Data\Docs"
+Write-Host "Updating Save Data In: $dir"
 
 Write-Host "Renaming Old Profile.save";
 Move-Item -Path "$dir\Profile.save" -Destination "$dir\Profile.save.bak" -Force;
