@@ -1,5 +1,9 @@
 # Usage
 ## Windows:
-```powershell
-irm -uri "https://raw.githubusercontent.com/Sceptyre/btdbattles-save-data/main/updateSave.ps1" | iex
-```
+- Open Powershell
+  - Win + R, powershell.exe or
+  - Win, search powershell
+- Run Command:
+  ```powershell
+  irm -uri "https://raw.githubusercontent.com/Sceptyre/btdbattles-save-data/main/winUpdateSave.ps1" | iex
+  ```
