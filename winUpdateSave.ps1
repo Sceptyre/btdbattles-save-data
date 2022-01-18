@@ -12,7 +12,7 @@ if($users.length -gt 1){
       Write-Host "$_ - $($users[$_])"
     }
     $opt = Read-Host "Please Select User to Update Save For: "
-    if ($indexes.Contains($opt) {
+    if ($indexes.Contains($opt)) {
       $user = $users[$opt]
       break;
     } else {
