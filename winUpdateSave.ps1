@@ -13,7 +13,7 @@ if($users.length -gt 1){
   $opt = Read-Host "Please Select User Update Save For: "
   $user = $users[$opt]
   
-} else if ($users.length -eq 1){
+} elseif ($users.length -eq 1){
   Write-Host "Found Following User:"
   Write-Host $users[0]
   
