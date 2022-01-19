@@ -1,4 +1,4 @@
-$steamdir=(@('HKLM:\SOFTWARE\Wow6432Node\Valve\Steam','HKLM:\SOFTWARE\Valve\Steam') | Select -First 1 | ? {Test-Path $_} | Get-ItemPropertyValue -Name InstallPath);
+$steamdir=(@('HKLM:\SOFTWARE\Wow6432Node\Valve\Steam','HKLM:\SOFTWARE\Valve\Steam') | ? {Test-Path $_}  | Select -First 1 | Get-ItemPropertyValue -Name InstallPath);
 Write-Host "Located Steam Directory: $steamdir";
 
 $users = @(gci "$steamdir\userdata" -Name -Directory)
