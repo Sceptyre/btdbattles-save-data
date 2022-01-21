@@ -11,14 +11,17 @@ if($users.length -gt 1){
     $indexes | % {
       Write-Host "$_ - $($users[$_])"
     }
-    $opt = Read-Host "Please Select User to Update Save For: "
-    if ($indexes.Contains($opt)) {
+    $opt = Read-Host "Please Select User to Update Save For"
+    try {
       $user = $users[$opt]
-      break;
-    } else {
+      if (!$indexes.Contains($index)) {
+        break
+      }
+      $index = [int]$opt
+    } catch {
       Write-Host "Invalid Option"
     }
-  }  
+  } 
 } elseif($users.length -eq 1) {
   Write-Host "Found Following User:"
   Write-Host $users[0]
